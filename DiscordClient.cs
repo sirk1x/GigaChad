@@ -16,7 +16,7 @@ namespace Shitcord_Statusser
 
         private bool m_ShowAd = bool.Parse(FileIO.Load(FileIO.Configs + "show-ad.txt")[0]);
 
-        private Button m_AdButton = new Button { Label = "GigaChad on GitHub", Url = "https://github.com/sirk1x" };
+        private Button m_AdButton = new Button { Label = "GigaChad available on GitHub", Url = "https://github.com/sirk1x/GigaChad" };
 
         private DynamicLinkedList<string> m_ImageList = new DynamicLinkedList<string>(FileIO.Load(
                     FileIO.Configs + "images.txt")
@@ -95,7 +95,7 @@ namespace Shitcord_Statusser
 
         private void LoadChoices()
         {
-            var _lines = FileIO.Load(FileIO.Configs + "choices.txt");
+            var _lines = FileIO.Load(FileIO.Configs + "buttons.txt");
             var _list = new List<Button>();
             foreach (var item in _lines)
                 if(!string.IsNullOrEmpty(item) && item.Contains("|"))
