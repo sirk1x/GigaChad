@@ -16,7 +16,8 @@ namespace Shitcord_Statusser
 
         private bool m_ShowAd = bool.Parse(FileIO.Load(FileIO.Configs + "show-ad.txt")[0]);
 
-        private Button m_AdButton = new Button { Label = "GigaChad available on GitHub", Url = "https://github.com/sirk1x/GigaChad" };
+        private Button m_AdButton = 
+            new Button { Label = "GigaChad available on GitHub", Url = "https://github.com/sirk1x/GigaChad" };
 
         private DynamicLinkedList<string> m_ImageList = new DynamicLinkedList<string>(FileIO.Load(
                     FileIO.Configs + "images.txt")
@@ -28,9 +29,7 @@ namespace Shitcord_Statusser
             LoadChoices();
             while (Client == null)
             {
-                Client = new DiscordRpcClient(FileIO.Load(
-        FileIO.Configs + "appid.txt")[0]
-        );
+                Client = new DiscordRpcClient(FileIO.Load(FileIO.Configs + "appid.txt")[0]);
             }
             
 
@@ -71,14 +70,14 @@ namespace Shitcord_Statusser
                 Client.SetPresence(new RichPresence()
                 {
 
-                    Details = _task.info.lyrics,
+                    Details = _task.info.lyrics.LimitLength(128),
                     Buttons = new Button[]
                     {
                             m_Buttons.m_Next,
                             m_ShowAd ? m_AdButton : m_Buttons.m_Next,
 
                     },
-                    State = _task.info.title,
+                    State = _task.info.title.LimitLength(128),
                     Assets = new Assets
                     {
                         LargeImageKey = m_ImageList.m_Next,
